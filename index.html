@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COIN COURT · AICS Circuit v. Being Broke</title>
+  <meta name="description" content="A pixel-art mock trial where the Hack Club reviewer is the judge and AICS Circuit argues for coins.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" id="favicon" href="data:,">
+</head>
+<body>
+  <div id="app">
+
+    <section id="title" class="screen active">
+      <div class="rays"></div>
+      <div class="title-inner">
+        <p class="case-no">CASE NO. <span class="case-num">404</span> · COINS NOT FOUND</p>
+        <h1 class="logo"><span class="logo-coin">COIN</span><span class="logo-court">COURT</span></h1>
+        <p class="versus"><b class="club-name">AICS CIRCUIT</b> <i>v.</i> <b>BEING BROKE</b></p>
+        <div class="title-cast">
+          <img class="sprite t-defendant" data-sprite="defendant" alt="the defendant">
+          <div class="t-coins">
+            <img class="sprite spin" data-sprite="coin" alt="">
+            <img class="sprite spin d1" data-sprite="coin" alt="">
+            <img class="sprite spin d2" data-sprite="coin" alt="">
+          </div>
+          <img class="sprite t-judge" data-sprite="judge" alt="the judge">
+        </div>
+        <p class="you-are">You are the <b>JUDGE</b>. Yes, you. The reviewer. Hi. 👋</p>
+        <button id="startBtn" class="btn btn-gold btn-big">🔨 ALL RISE</button>
+        <p class="hint blink">~3 min trial · sound on for max drama 🔊</p>
+      </div>
+      <div class="ticker"><div class="ticker-track" id="titleTicker"></div></div>
+    </section>
+
+    <section id="court" class="screen">
+      <header id="hud">
+        <div class="hud-logo">⚖ COIN COURT</div>
+        <div class="hud-stats">
+          <div class="chip" id="coinChip" title="Coins requested"><img class="sprite" data-sprite="coin" id="hudCoin" alt=""><span id="coinCount">0</span></div>
+          <div class="chip aura" id="auraChip" title="Aura"><span class="lbl">AURA</span><span id="auraCount">0</span></div>
+          <div class="chip" title="Gavel bangs">🔨<span id="gavelCount">0</span></div>
+          <div class="chip" title="Objections">✋<span id="objCount">0</span></div>
+        </div>
+        <div class="hud-btns">
+          <button id="skipBtn" class="btn btn-mini" title="Reviewers are busy. We get it.">⏩ SKIP TO VERDICT</button>
+          <button id="muteBtn" class="btn btn-mini" aria-label="Toggle sound">🔊</button>
+        </div>
+      </header>
+
+      <div id="stage">
+        <div class="wall">
+          <div class="window w-left"><i></i></div>
+          <div class="window w-right"><i></i></div>
+          <div class="banner">IN CODE WE TRUST</div>
+          <div class="seal">⚖</div>
+        </div>
+        <div class="floor"></div>
+
+        <img class="sprite bailiff" id="bailiff" data-sprite="bailiff" alt="Bailiff Duck">
+
+        <div class="bench">
+          <div class="judge-wrap">
+            <img class="sprite judge" id="judge" data-sprite="judge" alt="The Judge (you)">
+            <img class="sprite shades" id="judgeShades" data-sprite="judgeShades" alt="">
+          </div>
+          <div class="bench-front"><span class="nameplate" id="nameplate">HON. REVIEWER</span></div>
+          <button class="gavel" id="gavelBtn" aria-label="Bang the gavel"><img class="sprite" data-sprite="gavel" alt=""></button>
+        </div>
+
+        <div class="defense">
+          <div class="defendant-wrap" id="defendantWrap">
+            <img class="sprite" id="defendant" data-sprite="defendant" alt="The defendant">
+            <img class="sprite shades" id="defShades" data-sprite="defShades" alt="">
+            <img class="sprite sweat" id="sweat" data-sprite="sweat" alt="">
+          </div>
+          <div class="podium"><span>DEFENSE</span></div>
+        </div>
+
+        <div class="stand">
+          <div class="stand-slot">
+            <div class="witness" id="witness">
+              <div class="w-eyes"><i></i><i></i></div>
+              <pre class="w-code" id="witnessCode"></pre>
+            </div>
+            <img class="sprite prosecutor" id="prosecutor" data-sprite="prosecutor" alt="Prosecutor Spreadsheet">
+          </div>
+          <div class="stand-front"><span id="standLabel">WITNESS</span></div>
+        </div>
+
+        <div class="jury">
+          <div class="jury-ducks" id="jury"></div>
+          <div class="jury-front"><span>JURY OF DUCKS</span></div>
+        </div>
+
+        <div class="exhibit" id="exhibit">
+          <div class="ex-tab" id="exTitle">EXHIBIT A</div>
+          <div class="ex-body" id="exBody"></div>
+        </div>
+      </div>
+
+      <p id="srLine" class="sr-only" aria-live="polite"></p>
+      <div id="dialogue" tabindex="0" role="button" aria-label="Next line">
+        <div class="portrait"><img class="sprite" id="portrait" alt=""></div>
+        <div class="speech">
+          <div class="speaker" id="speaker">BAILIFF DUCK</div>
+          <p class="line" id="line"></p>
+          <span class="next" id="nextArrow">▼ click / space</span>
+        </div>
+      </div>
+      <div id="choices"></div>
+      <div class="ticker"><div class="ticker-track" id="courtTicker"></div></div>
+    </section>
+
+    <section id="verdict" class="overlay">
+      <div class="rays"></div>
+      <div class="v-panel" id="vPanel">
+        <p class="v-kicker">CASE NO. <span class="case-num">404</span> · FINAL RULING</p>
+        <h2 class="v-title">THE COURT WILL<br>NOW RULE</h2>
+        <div class="v-cast">
+          <div class="v-judge-wrap">
+            <img class="sprite" data-sprite="judge" alt="">
+            <img class="sprite shades" data-sprite="judgeShades" alt="">
+          </div>
+        </div>
+        <p class="v-q">Your Honor, does <b class="club-name">AICS CIRCUIT</b> deserve the coins?</p>
+        <div class="v-btns">
+          <button id="grantBtn" class="btn btn-gold btn-big pulse">💰 GRANT THE COINS</button>
+          <button id="denyBtn" class="btn btn-deny">deny</button>
+        </div>
+        <div class="v-bubble" id="vBubble">
+          <img class="sprite" data-sprite="defendant" alt="">
+          <span id="vBubbleText">please. please. please. please.</span>
+        </div>
+      </div>
+
+      <div class="record" id="record">
+        <div class="rec-head">⚖ OFFICIAL COURT RECORD ⚖</div>
+        <p class="rec-case">CASE NO. <span class="case-num">404</span> · <span class="club-name">AICS CIRCUIT</span> v. BEING BROKE</p>
+        <p class="rec-ruling">RULING: <b>COINS GRANTED ✅</b></p>
+        <ul class="rec-stats" id="recStats"></ul>
+        <p class="rec-fine">*legally binding in this court only. please pay in real coins.</p>
+        <div class="rec-stamp">CASE<br>CLOSED</div>
+        <p class="rec-done">ur done, your honor. go approve the ship 🫡</p>
+        <div class="rec-btns">
+          <button id="retrialBtn" class="btn btn-mini">🔁 RETRIAL</button>
+          <button id="copyBtn" class="btn btn-mini">📋 COPY RULING</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="stamp" aria-hidden="true"></div>
+  <div id="toasts"></div>
+  <canvas id="fx"></canvas>
+  <div id="crt"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
