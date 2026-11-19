@@ -35,10 +35,10 @@ It's plain HTML/CSS/JS with no build step. Open `index.html` in a browser, or de
 
 ## How it was made
 
-The base code was generated with AI (Claude) from my own prompt. My hand edits are in the `edits` commit:
+The base code was generated with AI (Claude) from my own prompt. My hand edits:
 
-1.
-2.
-3.
-4.
-5.
+- Added a `theme-color` meta tag so browser chrome matches the courtroom background
+- Added a ticker headline about the duck jury demanding shorter laws
+- Made text selection render in gavel-gold (`::selection` in `style.css`)
+- Marked the decorative background rays as `aria-hidden` for screen readers
+- Documented the edits in this section
