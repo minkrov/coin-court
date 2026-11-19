@@ -19,6 +19,7 @@ const HEADLINES = [
   "'it works on my machine' ruled admissible evidence",
   "judge's aura reaches record highs",
   "console.log still saying pls",
+  "duck jury demands shorter laws, longer recesses",
 ];
 
 // ===== HELPERS =====

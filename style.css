@@ -31,6 +31,7 @@ body {
 }
 button { font: inherit; color: inherit; }
 .sprite { image-rendering: pixelated; display: block; user-select: none; -webkit-user-drag: none; }
+::selection { background: var(--gold); color: var(--ink); }
 
 .screen { display: none; }
 .screen.active { display: flex; }
