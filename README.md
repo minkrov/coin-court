@@ -35,10 +35,11 @@ It's plain HTML/CSS/JS with no build step. Open `index.html` in a browser, or de
 
 ## How it was made
 
-The base code was generated with AI (Claude) from my own prompt. My hand edits are in the `edits` commit:
+The base code was generated with AI (Claude) from my own prompt. My hand edits:
 
-1.
-2.
-3.
-4.
-5.
+- Snapped the typewriter dialogue a little faster (18 → 16 ms per character)
+- Sped up the news ticker marquee (60s → 45s)
+- Raised the contrast on the title-screen hint text
+- Reworded the title-screen time hint ("about 3 minutes · sound on for full drama")
+- Added a tooltip to the runaway DENY button ("it runs away. not a bug.")
+- Plus smaller polish: theme-color meta tag, gavel-gold text selection, `aria-hidden` decoration

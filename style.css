@@ -31,6 +31,7 @@ body {
 }
 button { font: inherit; color: inherit; }
 .sprite { image-rendering: pixelated; display: block; user-select: none; -webkit-user-drag: none; }
+::selection { background: var(--gold); color: var(--ink); }
 
 .screen { display: none; }
 .screen.active { display: flex; }
@@ -95,7 +96,7 @@ button { font: inherit; color: inherit; }
 .t-coins img { width: clamp(22px, 3.4vw, 34px); }
 .you-are { font-size: clamp(20px, 3vw, 28px); }
 .you-are b { color: var(--gold); }
-.hint { font-family: var(--font-title); font-size: 9px; color: #cbb8ff; }
+.hint { font-family: var(--font-title); font-size: 9px; color: #e2d9ff; }
 #title .ticker { position: absolute; left: 0; right: 0; bottom: 0; }
 
 /* ===== TICKER ===== */
@@ -111,7 +112,7 @@ button { font: inherit; color: inherit; }
   padding: 7px 0;
   white-space: nowrap;
 }
-.ticker-track { display: inline-block; animation: marquee 60s linear infinite; }
+.ticker-track { display: inline-block; animation: marquee 45s linear infinite; }
 .ticker-track b { color: var(--gold); margin: 0 18px; }
 
 /* ===== COURT LAYOUT ===== */

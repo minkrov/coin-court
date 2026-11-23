@@ -4,7 +4,7 @@ const CONFIG = {
   judgeName: "HON. REVIEWER",
   caseNumber: "404",
   finalCoins: 1000000,
-  typeSpeed: 18,
+  typeSpeed: 16,
 };
 
 const HEADLINES = [
@@ -19,6 +19,7 @@ const HEADLINES = [
   "'it works on my machine' ruled admissible evidence",
   "judge's aura reaches record highs",
   "console.log still saying pls",
+  "duck jury demands shorter laws, longer recesses",
 ];
 
 // ===== HELPERS =====
