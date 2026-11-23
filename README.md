@@ -11,7 +11,7 @@ Made by AICS Circuit for the Hack Club **Vibes** workshop.
 3. When the defense makes its case, you rule on it: **I'LL ALLOW IT** or **OBJECTION!** (keys `1` / `2`).
 4. At the end, deliver your final verdict. Good luck pressing deny.
 
-Secrets: bang the gavel (click it or press `G`), boop the duck jurors, press `F` to pay respects, and open the dev tools when the console.log witness asks you to.
+Secrets: bang the gavel (click it or press `G`), toggle auto-read (`A`), mute anywhere (`M`), boop the duck jurors, press `F` to pay respects, and open the dev tools when the console.log witness asks you to.
 
 ## Features
 
@@ -20,6 +20,7 @@ Secrets: bang the gavel (click it or press `G`), boop the duck jurors, press `F`
 - Witnesses that are lines of code: an if statement, an infinite loop, console.log, undefined, and a TODO comment
 - Allow/Objection choices that award coins and aura, with flying coins, meme stamps, screen shake, and confetti
 - A DENY button that runs away from you
+- Auto-read toggle (`▶ AUTO` / `A` key), global mute shortcut (`M`), and persistent personal-best trial coin tracking on the final court record
 - 15 achievements, a news ticker, and a final court record you can copy
 - All pixel art is drawn in code (`makeSprites` in `script.js`), and every sound is generated with the Web Audio API, so there are no image or audio files
 
@@ -35,11 +36,16 @@ It's plain HTML/CSS/JS with no build step. Open `index.html` in a browser, or de
 
 ## How it was made
 
-The base code was generated with AI (Claude) from my own prompt. My hand edits:
+The base code was generated with AI (Claude) from my own prompt. My edits:
 
-- Snapped the typewriter dialogue a little faster (18 → 16 ms per character)
-- Sped up the news ticker marquee (60s → 45s)
-- Raised the contrast on the title-screen hint text
-- Reworded the title-screen time hint ("about 3 minutes · sound on for full drama")
-- Added a tooltip to the runaway DENY button ("it runs away. not a bug.")
-- Plus smaller polish: theme-color meta tag, gavel-gold text selection, `aria-hidden` decoration
+- Snapped the typewriter dialogue a little faster (`18` → `16` ms per character)
+- Sped up the news ticker marquee (`60s` → `45s`)
+- Raised the contrast on the title-screen hint text (`#cbb8ff` → `#e2d9ff`)
+- Reworded the title-screen time hint (`"about 3 minutes · sound on for full drama 🔊"`)
+- Added a tooltip to the runaway DENY button (`"it runs away. not a bug."`)
+
+Added features:
+
+- **Auto-read toggle (`▶ AUTO` / `A` key)**: automatically advances finished dialogue lines while pausing at choices
+- **Personal best tracker**: saves and displays your highest coins-argued score across trials on the Official Court Record (`NEW BEST!`)
+- **Global mute shortcut (`M` key)**: mutes or unmutes courtroom audio from anywhere with a toast confirmation

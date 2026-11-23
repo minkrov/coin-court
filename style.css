@@ -60,6 +60,7 @@ button { font: inherit; color: inherit; }
 .btn-big { font-size: clamp(14px, 2.4vw, 20px); padding: 18px 26px; }
 .btn-mini { font-size: 9px; padding: 7px 9px; border-width: 3px; box-shadow: inset -3px -3px 0 #0003, 0 4px 0 var(--ink); }
 .btn-mini:hover { box-shadow: inset -3px -3px 0 #0003, 0 6px 0 var(--ink); }
+.btn-mini.on { background: var(--gold); color: var(--ink); }
 .btn-deny { background: #a3a3b8; font-size: 11px; padding: 9px 12px; color: var(--ink); }
 .btn .key { font-size: 8px; opacity: .55; margin-left: 6px; }
 .pulse { animation: pulse 1s ease-in-out infinite; }

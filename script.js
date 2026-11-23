@@ -583,6 +583,8 @@ const state = {
   inVerdict: false,
   skipped: false,
   granted: false,
+  auto: false,
+  autoTimer: 0,
   witness: null,
   coins: 0,
   aura: 0,
@@ -884,7 +886,29 @@ function finishTyping() {
   if (cb) cb();
 }
 
+function scheduleAuto() {
+  clearTimeout(state.autoTimer);
+  if (!state.auto || !state.started || state.inVerdict || state.typing || state.awaiting || state.locked) return;
+  state.autoTimer = setTimeout(() => {
+    if (state.auto && !state.typing && !state.awaiting && !state.locked && !state.inVerdict) next();
+  }, 1150);
+}
+
+function toggleAuto() {
+  state.auto = !state.auto;
+  const btn = $("#autoBtn");
+  btn.classList.toggle("on", state.auto);
+  btn.setAttribute("aria-pressed", String(state.auto));
+  btn.textContent = state.auto ? "⏸ AUTO" : "▶ AUTO";
+  if (state.auto) {
+    if (!state.typing && !state.awaiting && !state.locked && !state.inVerdict) scheduleAuto();
+  } else {
+    clearTimeout(state.autoTimer);
+  }
+}
+
 function runStep(step) {
+  clearTimeout(state.autoTimer);
   $("#nextArrow").classList.remove("on");
   if (step.hide) hideProp(step.hide);
   if (step.show === "exhibit") showExhibit(step.exhibit);
@@ -894,7 +918,10 @@ function runStep(step) {
   if (step.stamp) stamp(step.stamp, step.stampColor || "red");
   speak(step.who, fmt(step.text), () => {
     if (step.choices) showChoices(step.choices);
-    else $("#nextArrow").classList.add("on");
+    else {
+      $("#nextArrow").classList.add("on");
+      scheduleAuto();
+    }
   });
 }
 
@@ -908,6 +935,7 @@ function next() {
 
 function advance() {
   if (!state.started || state.inVerdict) return;
+  clearTimeout(state.autoTimer);
   if (state.typing) return finishTyping();
   if (state.awaiting || state.locked) return;
   next();
@@ -998,6 +1026,7 @@ function openVerdict(skipped) {
   state.inVerdict = true;
   state.skipped = skipped;
   clearTimeout(state.timer);
+  clearTimeout(state.autoTimer);
   state.typing = false;
   state.awaiting = false;
   setTalking(state.who, false);
@@ -1104,10 +1133,30 @@ async function grant() {
   showRecord();
 }
 
+function getBestCoins() {
+  try { return Number(localStorage.getItem("coincourt-best")) || 0; } catch (e) { return 0; }
+}
+
+function saveBestCoins(n) {
+  try { localStorage.setItem("coincourt-best", String(n)); } catch (e) {}
+}
+
+function toggleMute(fromKey = false) {
+  Sound.init();
+  const muted = Sound.toggle();
+  $("#muteBtn").textContent = muted ? "🔇" : "🔊";
+  if (fromKey) toast(muted ? "🔇" : "🔊", "AUDIO", muted ? "Courtroom muted (press M to unmute)." : "Courtroom sound back on.");
+}
+
 function showRecord() {
+  const prevBest = getBestCoins();
+  const bestCoins = Math.max(prevBest, state.coins);
+  const isNewBest = state.coins > 0 && state.coins > prevBest;
+  if (isNewBest) saveBestCoins(bestCoins);
   const rows = [
     ["Coins awarded", "0*", "recCoins"],
     ["Coins argued for in trial", state.coins.toLocaleString()],
+    ["Best trial coins", `${bestCoins.toLocaleString()}${isNewBest ? " (NEW BEST!)" : ""}`],
     ["Aura farmed", state.aura.toLocaleString()],
     ["Gavel bangs", state.gavel],
     ["Objections raised", state.objections],
@@ -1203,10 +1252,8 @@ function init() {
   $("#dialogue").addEventListener("click", advance);
   $("#stage").addEventListener("click", (e) => { if (!e.target.closest("button")) advance(); });
   $("#gavelBtn").addEventListener("click", () => bangGavel(true));
-  $("#muteBtn").addEventListener("click", () => {
-    Sound.init();
-    $("#muteBtn").textContent = Sound.toggle() ? "🔇" : "🔊";
-  });
+  $("#autoBtn").addEventListener("click", toggleAuto);
+  $("#muteBtn").addEventListener("click", () => toggleMute(false));
   $("#skipBtn").addEventListener("click", () => openVerdict(true));
 
   const grantBtn = $("#grantBtn");
@@ -1228,6 +1275,7 @@ function init() {
     const k = e.key.toLowerCase();
     const onButton = e.target.closest && e.target.closest("button");
     if (k === "f" && !e.repeat) return payRespects();
+    if (k === "m" && !e.repeat) return toggleMute(true);
     if (!state.started) {
       if ((k === "enter" || k === " ") && !onButton) {
         e.preventDefault();
@@ -1245,6 +1293,7 @@ function init() {
       if (b) b.click();
     }
     if (k === "g" && !e.repeat) bangGavel(true);
+    if (k === "a" && !e.repeat) toggleAuto();
   });
 
   console.log("%c⚖️ COIN COURT", "font:24px monospace;color:#ffd23f;background:#1b1325;padding:8px 16px");
