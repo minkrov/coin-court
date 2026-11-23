@@ -31,6 +31,7 @@ body {
 }
 button { font: inherit; color: inherit; }
 .sprite { image-rendering: pixelated; display: block; user-select: none; -webkit-user-drag: none; }
+::selection { background: var(--gold); color: var(--ink); }
 
 .screen { display: none; }
 .screen.active { display: flex; }
@@ -59,6 +60,7 @@ button { font: inherit; color: inherit; }
 .btn-big { font-size: clamp(14px, 2.4vw, 20px); padding: 18px 26px; }
 .btn-mini { font-size: 9px; padding: 7px 9px; border-width: 3px; box-shadow: inset -3px -3px 0 #0003, 0 4px 0 var(--ink); }
 .btn-mini:hover { box-shadow: inset -3px -3px 0 #0003, 0 6px 0 var(--ink); }
+.btn-mini.on { background: var(--gold); color: var(--ink); }
 .btn-deny { background: #a3a3b8; font-size: 11px; padding: 9px 12px; color: var(--ink); }
 .btn .key { font-size: 8px; opacity: .55; margin-left: 6px; }
 .pulse { animation: pulse 1s ease-in-out infinite; }
@@ -95,7 +97,7 @@ button { font: inherit; color: inherit; }
 .t-coins img { width: clamp(22px, 3.4vw, 34px); }
 .you-are { font-size: clamp(20px, 3vw, 28px); }
 .you-are b { color: var(--gold); }
-.hint { font-family: var(--font-title); font-size: 9px; color: #cbb8ff; }
+.hint { font-family: var(--font-title); font-size: 9px; color: #e2d9ff; }
 #title .ticker { position: absolute; left: 0; right: 0; bottom: 0; }
 
 /* ===== TICKER ===== */
@@ -111,7 +113,7 @@ button { font: inherit; color: inherit; }
   padding: 7px 0;
   white-space: nowrap;
 }
-.ticker-track { display: inline-block; animation: marquee 60s linear infinite; }
+.ticker-track { display: inline-block; animation: marquee 45s linear infinite; }
 .ticker-track b { color: var(--gold); margin: 0 18px; }
 
 /* ===== COURT LAYOUT ===== */

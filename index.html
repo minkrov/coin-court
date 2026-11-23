@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>COIN COURT · AICS Circuit v. Being Broke</title>
   <meta name="description" content="A pixel-art mock trial where the Hack Club reviewer is the judge and AICS Circuit argues for coins.">
+  <meta name="theme-color" content="#170f2b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
   <div id="app">
 
     <section id="title" class="screen active">
-      <div class="rays"></div>
+      <div class="rays" aria-hidden="true"></div>
       <div class="title-inner">
         <p class="case-no">CASE NO. <span class="case-num">404</span> · COINS NOT FOUND</p>
         <h1 class="logo"><span class="logo-coin">COIN</span><span class="logo-court">COURT</span></h1>
@@ -31,7 +32,7 @@
         </div>
         <p class="you-are">You are the <b>JUDGE</b>. Yes, you. The reviewer. Hi. 👋</p>
         <button id="startBtn" class="btn btn-gold btn-big">🔨 ALL RISE</button>
-        <p class="hint blink">~3 min trial · sound on for max drama 🔊</p>
+        <p class="hint blink">about 3 minutes · sound on for full drama 🔊</p>
       </div>
       <div class="ticker"><div class="ticker-track" id="titleTicker"></div></div>
     </section>
@@ -46,8 +47,9 @@
           <div class="chip" title="Objections">✋<span id="objCount">0</span></div>
         </div>
         <div class="hud-btns">
+          <button id="autoBtn" class="btn btn-mini" aria-pressed="false" title="Auto-advance dialogue (A)">▶ AUTO</button>
           <button id="skipBtn" class="btn btn-mini" title="Reviewers are busy. We get it.">⏩ SKIP TO VERDICT</button>
-          <button id="muteBtn" class="btn btn-mini" aria-label="Toggle sound">🔊</button>
+          <button id="muteBtn" class="btn btn-mini" aria-label="Toggle sound" title="Toggle sound (M)">🔊</button>
         </div>
       </header>
 
@@ -116,7 +118,7 @@
     </section>
 
     <section id="verdict" class="overlay">
-      <div class="rays"></div>
+      <div class="rays" aria-hidden="true"></div>
       <div class="v-panel" id="vPanel">
         <p class="v-kicker">CASE NO. <span class="case-num">404</span> · FINAL RULING</p>
         <h2 class="v-title">THE COURT WILL<br>NOW RULE</h2>
@@ -129,7 +131,7 @@
         <p class="v-q">Your Honor, does <b class="club-name">AICS CIRCUIT</b> deserve the coins?</p>
         <div class="v-btns">
           <button id="grantBtn" class="btn btn-gold btn-big pulse">💰 GRANT THE COINS</button>
-          <button id="denyBtn" class="btn btn-deny">deny</button>
+          <button id="denyBtn" class="btn btn-deny" title="it runs away. not a bug.">deny</button>
         </div>
         <div class="v-bubble" id="vBubble">
           <img class="sprite" data-sprite="defendant" alt="">
